@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "367438665113",
+    "firebase_url": "https://knowwhere-88625.firebaseio.com",
+    "project_id": "knowwhere-88625",
+    "storage_bucket": "knowwhere-88625.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367438665113:android:0f6e060866d9d3d6",
+        "android_client_info": {
+          "package_name": "com.example.bruger.knowwhere"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "367438665113-nosbnra4sbcq7a6ro7ggmai28oj86okr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuTRipPBWjL3w2XSZtu3sG4rN_SGSeMfs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

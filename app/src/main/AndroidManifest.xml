@@ -24,10 +24,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Register" />
-        <activity
-            android:name=".Board"
-            android:label="@string/title_activity_board"
-            android:theme="@style/AppTheme.NoActionBar" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -42,7 +38,11 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".Board"
+            android:label="@string/title_activity_board"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
