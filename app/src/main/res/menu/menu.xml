@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/list_establishments"
+        android:title="List of Establishments"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/category"
+        android:title="Category"
+        app:showAsAction="never">
+
+        <menu>
+            <item android:id="@+id/all"
+                android:title="All"
+                app:showAsAction="never"
+                />
+            <item android:id="@+id/clubs"
+                android:title="Clubs, Bars and Pubs"
+                app:showAsAction="never"/>
+            <item android:id="@+id/restaurants"
+                android:title="Restaurants and Café"
+                app:showAsAction="never"/>
+            <item android:id="@+id/hotspots"
+                android:title="Hotspots"
+                app:showAsAction="never"/>
+        </menu>
+    </item>
+
+    <item android:id="@+id/about"
+        android:title="About"
+        app:showAsAction="never"/>
+
+
+</menu>

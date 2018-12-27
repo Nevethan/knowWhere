@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.bruger.knowwhere.EstablishmentInfo">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
+         />
+
+    <TextView
+        android:id="@+id/estblishmentName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView2"
+        android:text="Name"
+        android:textSize="32sp"/>
+
+    <TextView
+        android:id="@+id/establishmentAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/estblishmentName"
+        android:text="Address" />
+
+    <TextView
+        android:id="@+id/establishmentRating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/establishmentAddress"
+        android:text="Ratings" />
+
+    <TextView
+        android:id="@+id/establishmentType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/establishmentRating"
+        android:text="Type" />
+
+    <TextView
+        android:id="@+id/establishmentDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/establishmentType"
+        android:layout_marginTop="19dp"
+        android:text="Description" />
+
+</android.widget.RelativeLayout>

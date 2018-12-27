@@ -1,31 +1,25 @@
 package com.example.bruger.knowwhere;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-
-import android.widget.TableLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
 public class Board extends AppCompatActivity {
-
+    /*
+        Source https://www.youtube.com/watch?v=bNpWGI_hGGg
+    */
 
     private SectionsPageAdapter mSectionsPageAdapter;
 
     private ViewPager mViewPager;
+
+    private DataManager dataManager = DataManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +37,7 @@ public class Board extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager){
         SectionsPageAdapter sectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
-        sectionsPageAdapter.addFragment(new Tab1Events(), "Posts");
+        sectionsPageAdapter.addFragment(new Tab1Posts(), "Posts");
         sectionsPageAdapter.addFragment(new Tab2Map(), "Map");
         sectionsPageAdapter.addFragment(new Tab3AR(), "AR");
 
@@ -51,4 +45,54 @@ public class Board extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    /*
+            The switch statement has a case for each menu item and its implementation.
+            Each of the categories call a method from DataManager to update the list showed in the listview.
+            Then the entire board.class will be refreshed.
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.about:
+                Toast.makeText(this, "about", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.all:
+                dataManager.allCategory();
+                directToBoard();
+                return true;
+            case R.id.clubs:
+                dataManager.barsCategory();
+                directToBoard();
+                return true;
+            case R.id.restaurants:
+                dataManager.cafeCategory();
+                directToBoard();
+                return true;
+            case R.id.hotspots:
+                dataManager.hotCategory();
+                directToBoard();
+                return true;
+            case R.id.list_establishments:
+                directToEstablishmentList();
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void directToEstablishmentList(){
+        Intent intent = new Intent(this, EstablishmentsList.class);
+        startActivity(intent);
+    }
+
+    public void directToBoard(){
+        Intent intent = new Intent(this, Board.class);
+        startActivity(intent);
+    }
 }

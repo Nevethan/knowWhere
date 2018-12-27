@@ -1,47 +1,45 @@
 package com.example.bruger.knowwhere;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Register extends AppCompatActivity {
 
 
-    EditText mEditUsermane, mEditPassword;
+    EditText registerUsername, registerPassword;
+
+    DataManager dataManager = DataManager.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        mEditUsermane = (EditText)findViewById(R.id.editUsernameRegister);
-        mEditPassword = (EditText)findViewById(R.id.editPasswordRegister);
+        registerUsername = (EditText) findViewById(R.id.editTextUsernameRegister);
+        registerPassword = (EditText) findViewById(R.id.editTextPasswordRegister);
+
     }
 
-    public void registerNewUser(View view){
-        validateUsername(mEditUsermane.getText().toString());
-    }
+    public void registerNewUsername(View view){
+        String username = registerUsername.getText().toString();
+        String password = registerPassword.getText().toString();
 
-    private void validateUsername(String email){
-        if(isEmailValid(email)){
-            //Email is valid. Check if it is in the system.
-            //Firebase
-                //if true;
-                    //Create a new user with the given email and password
-                    //and make the user log in.
-        }else {
-            Toast.makeText(Register.this, "Email is already being used", Toast.LENGTH_SHORT).show();
+        boolean checkIfUserExits = dataManager.checkRegisterCredentials(username, password);
+
+        if(!username.isEmpty() && !password.isEmpty()){
+            if(!checkIfUserExits){
+                Toast.makeText(this, "Username already exists. Please try again", Toast.LENGTH_SHORT).show();
+            }else{
+                Intent intent = new Intent(this,Board.class);
+                startActivity(intent);
+
+            }
+        }else{
+            Toast.makeText(this,"Please enter an username and a password", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private boolean isEmailValid(String email) {
-        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
     }
 }

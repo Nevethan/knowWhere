@@ -1,51 +1,62 @@
 package com.example.bruger.knowwhere;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 public class MainActivity extends AppCompatActivity {
+
+    //FirebaseManager firebaseManager = new FirebaseManager();
+    DataManager dataManager = DataManager.getInstance();
+
+    EditText mEditUsername, mEditPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+
+        mEditUsername = (EditText) findViewById(R.id.editUsername);
+        mEditPassword = (EditText) findViewById(R.id.editPassword);
+
+        initiateData();
     }
 
-
     public void logIn(View view){
-        Intent intent = new Intent(this,Board.class);
-        startActivity(intent);
+
+        String tempUsername = mEditUsername.getText().toString();
+        String tempPassword = mEditPassword.getText().toString();
+
+        boolean checkUser = dataManager.checkUserCredentials(tempUsername, tempPassword);
+
+        if(!tempUsername.isEmpty() && !tempPassword.isEmpty()){
+            if(checkUser){
+                Intent intent = new Intent(this,Board.class);
+
+                startActivity(intent);
+            }else{
+                Toast.makeText(this,"The user credentials are wrong. Please try again", Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            Toast.makeText(this,"Please enter an username and a password", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void register(View view){
-        Intent intent = new Intent(this, Register.class);
+        Intent intent = new Intent(this,Register.class);
         startActivity(intent);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case 101:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //granted
-                } else {
-                    Toast.makeText(MainActivity.this, "All Permission needs to be Granted", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
+    private void initiateData(){
+        dataManager.getEstablishments();
+        dataManager.getPosts();
     }
 
 }
